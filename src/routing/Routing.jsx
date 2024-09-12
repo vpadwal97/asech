@@ -18,7 +18,7 @@ const Routing = createBrowserRouter([
         ],
       },
       {
-        path: "/PushTextFileToGithub",
+        path: "/pushtoGit",
         element: <PushTextFileToGithub />,
       },
       {

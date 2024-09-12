@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { selectGitCreds } from "../../redux/appSlice";
@@ -84,7 +84,7 @@ const PushTextFileToGithub = () => {
   };
 
   // Check if the file exists when the file name changes
-  React.useEffect(() => {
+  useEffect(() => {
     if (fileName) {
       checkIfFileExists();
     }
