@@ -4,7 +4,7 @@ const initialState = {
   stories: null,
   tinymceApiID : "ljg83y8hvjknl22l8vbjn86wcm1nly0rrwkkz1rdjqfuzohw",
   gitCreds: {
-    githubToken : "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",
+    // githubToken : "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",
     repoOwner: "vpadwal97",
     repoName: "asech-thoughts",
     branch: "main",
