@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   stories: null,
+  switchTheme: false,
   tinymceApiID : "ljg83y8hvjknl22l8vbjn86wcm1nly0rrwkkz1rdjqfuzohw",
   gitCreds: {
     githubToken : "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",
@@ -18,12 +19,16 @@ export const appSlice = createSlice({
     setStories: (state, action) => {
       state.stories = action.payload;
     },
+    setswitchTheme: (state, action) => {
+      state.switchTheme = action.payload;
+    },
   },
 });
 
-export const { setStories } = appSlice.actions;
+export const { setStories,setswitchTheme } = appSlice.actions;
 
 export const selectStories = (state) => state.app.stories;
+export const selectswitchTheme = (state) => state.app.switchTheme;
 export const selectGitCreds = (state) => state.app.gitCreds;
 export const selectTinymceApiID = (state) => state.app.tinymceApiID;
 

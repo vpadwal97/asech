@@ -18,7 +18,7 @@ const Stories = () => {
   return (
     <div className="">
       <section className="p-lg-5 p-md-4 px-3 py-4 d-flex justify-content-center align-items-center">
-        <div className="rounded-3 bg-light content">
+        <div className="rounded-3 content">
           <h1 className="px-lg-5 px-4 py-2 title fw-semibold position-sticky top-0 w-100 mt-4 mb-5 text-center">
             {storyName}
           </h1>
