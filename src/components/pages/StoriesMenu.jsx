@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Outlet, useNavigate } from "react-router-dom";
 import {
@@ -10,18 +10,19 @@ import { useDispatch, useSelector } from "react-redux";
 
 const StoriesMenu = () => {
   // const [filess, setFiles] = useState();
-  const files= useSelector(selectStories);
+  const files = useSelector(selectStories);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const gitCreds = useSelector(selectGitCreds);
-
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const fetchFiles = async () => {
+    setLoading(true);
+    setError(null);
     try {
-      const repoOwner = gitCreds.repoOwner; //"vpadwal97"; // Example: 'facebook'
-      const repoName = gitCreds.repoName; //"asech-thoughts"; // Example: 'react'
-      const branch = gitCreds.branch; //"main"; // Branch where the files are stored
-      // Fetch the contents of the repo
+      const { repoOwner, repoName, branch } = gitCreds;
+
       const res = await axios.get(
         `https://api.github.com/repos/${repoOwner}/${repoName}/git/trees/${branch}?recursive=1`
       );
@@ -46,13 +47,17 @@ const StoriesMenu = () => {
       // dispatch(setStories(null));
       // setFiles(fileData);
     } catch (error) {
-      dispatch(setStories(null));
+      setError("Error fetching files");
       console.error("Error fetching files", error);
+      dispatch(setStories(null));
+    } finally {
+      setLoading(false);
     }
   };
+
   useEffect(() => {
     fetchFiles();
-  },[]);
+  }, []);
 
   const handleClick = (data, fname, i) => {
     // navigate(`story/${fname}`, { state: { story: data } });
@@ -76,7 +81,7 @@ const StoriesMenu = () => {
           ))}
         </div>
       ) : (
-        <p>No Stories found.</p>
+        !loading && <p>No Stories found.</p>
       )}
 
       <Outlet />
