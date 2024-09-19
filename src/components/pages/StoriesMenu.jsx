@@ -16,7 +16,7 @@ const StoriesMenu = () => {
   const gitCreds = useSelector(selectGitCreds);
   const [loading, setLoading] = useState(true);
   // const [error, setError] = useState(null);
-  const [setError] = useState(null);
+  const [error, setError] = useState(null);
 
   const fetchFiles = async () => {
     setLoading(true);
