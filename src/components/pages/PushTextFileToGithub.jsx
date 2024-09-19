@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { selectGitCreds } from "../../redux/appSlice";
+import { selectGitCreds } from "../../redux/asechSlice";
 import HtmlEditor from "./HtmlEditor";
 import FormTextarea from "../forms/FormTextarea";
 import FormGroup from "../forms/FormGroup";

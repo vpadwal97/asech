@@ -5,7 +5,7 @@ import {
   selectGitCreds,
   selectStories,
   setStories,
-} from "../../redux/appSlice";
+} from "../../redux/asechSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const StoriesMenu = () => {

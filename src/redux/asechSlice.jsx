@@ -12,8 +12,8 @@ const initialState = {
   },
 };
 
-export const appSlice = createSlice({
-  name: "app",
+export const asechSlice = createSlice({
+  name: "asech",
   initialState,
   reducers: {
     setStories: (state, action) => {
@@ -25,11 +25,11 @@ export const appSlice = createSlice({
   },
 });
 
-export const { setStories,setswitchTheme } = appSlice.actions;
+export const { setStories,setswitchTheme } = asechSlice.actions;
 
-export const selectStories = (state) => state.app.stories;
-export const selectswitchTheme = (state) => state.app.switchTheme;
-export const selectGitCreds = (state) => state.app.gitCreds;
-export const selectTinymceApiID = (state) => state.app.tinymceApiID;
+export const selectStories = (state) => state.asech.stories;
+export const selectswitchTheme = (state) => state.asech.switchTheme;
+export const selectGitCreds = (state) => state.asech.gitCreds;
+export const selectTinymceApiID = (state) => state.asech.tinymceApiID;
 
-export default appSlice.reducer;
+export default asechSlice.reducer;

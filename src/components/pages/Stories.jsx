@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { selectStories } from "../../redux/appSlice";
+import { selectStories } from "../../redux/asechSlice";
 import SafeHtmlRenderer from "./SafeHtmlRenderer";
 
 const Stories = () => {

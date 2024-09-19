@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { useSelector } from "react-redux";
-import { selectTinymceApiID } from "../../redux/appSlice";
+import { selectTinymceApiID } from "../../redux/asechSlice";
 import "../../assets/css/storyStyle.scss";
 
 export default function HtmlEditor({ ...props }) {

@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import appReducer from "./appSlice";
+import asechReducer from "./asechSlice";
 
 const persistConfig = {
   key: "root",
@@ -9,7 +9,7 @@ const persistConfig = {
   storage,
 };
 
-const rootReducer = combineReducers({ app: appReducer });
+const rootReducer = combineReducers({ asech: asechReducer });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
