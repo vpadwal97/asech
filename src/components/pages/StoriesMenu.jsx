@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { Outlet, useNavigate } from "react-router-dom";
 import {
@@ -18,7 +18,7 @@ const StoriesMenu = () => {
   // const [error, setError] = useState(null);
   const [error, setError] = useState(null);
 
-  const fetchFiles = async () => {
+  const fetchFiles = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
@@ -54,11 +54,11 @@ const StoriesMenu = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [gitCreds, dispatch]);
 
   useEffect(() => {
     fetchFiles();
-  }, []);
+  }, [fetchFiles]);
 
   const handleClick = (data, fname, i) => {
     // navigate(`story/${fname}`, { state: { story: data } });

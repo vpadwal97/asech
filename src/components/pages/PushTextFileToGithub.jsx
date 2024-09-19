@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { selectGitCreds } from "../../redux/asechSlice";
@@ -11,18 +11,15 @@ const PushTextFileToGithub = () => {
   const [fileName, setFileName] = useState("example");
   const [commitMessage, setCommitMessage] = useState("Added/Updated text file");
   const [fileSha, setFileSha] = useState(""); // SHA needed for updating
+  const [loading, setLoading] = useState(false); // Loading state
   const gitCreds = useSelector(selectGitCreds);
 
   // GitHub repo details from Redux store
-  const githubToken = gitCreds.githubToken;
-  const repoOwner = gitCreds.repoOwner;
-  const repoName = gitCreds.repoName;
-  const branch = gitCreds.branch;
-
+  const { githubToken, repoOwner, repoName, branch } = gitCreds;
   const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${fileName}`;
 
   // Fetch file SHA if it exists
-  const checkIfFileExists = async () => {
+  const checkIfFileExists = useCallback(async () => {
     try {
       const response = await axios.get(apiUrl, {
         headers: {
@@ -32,11 +29,9 @@ const PushTextFileToGithub = () => {
       });
 
       setFileSha(response.data.sha); // Store file's SHA for updating
-
       // Decode the base64 content and set it to inputText
       const decodedContent = atob(response.data.content);
       setInputText(decodedContent);
-
       console.log("File exists, SHA:", response.data.sha);
     } catch (error) {
       if (error.response && error.response.status === 404) {
@@ -45,14 +40,21 @@ const PushTextFileToGithub = () => {
         console.error("Error checking file existence:", error);
       }
     }
-  };
+  }, [apiUrl, githubToken]);
 
   // Function to create or update the text file on GitHub
   const pushTextFileToGithub = async () => {
+    // Validate inputs
+    if (!fileName || !commitMessage) {
+      alert("File name and commit message are required.");
+      return;
+    }
+
+    setLoading(true); // Start loading state
+
     try {
       // Create the content for the file (base64 encoded)
       const content = btoa(inputText); // Base64 encode the text content
-
       // Prepare the data to be sent to GitHub
       const data = {
         message: commitMessage,
@@ -76,10 +78,14 @@ const PushTextFileToGithub = () => {
       console.log("File pushed to GitHub:", response.data);
       alert("File successfully pushed/updated on GitHub!");
     } catch (error) {
+      let errorMessage = "Failed to push/update the file to GitHub.";
+      if (error.response) {
+        errorMessage += ` ${error.response.data.message}`;
+      }
       console.error("Error pushing/updating file on GitHub", error);
-      alert(
-        "Failed to push/update the file to GitHub. See console for details."
-      );
+      alert(errorMessage);
+    } finally {
+      setLoading(false); // End loading state
     }
   };
 
@@ -88,7 +94,7 @@ const PushTextFileToGithub = () => {
     if (fileName) {
       checkIfFileExists();
     }
-  }, [fileName]);
+  }, [fileName, checkIfFileExists]);
 
   return (
     <div className="container-fluid">
@@ -117,7 +123,6 @@ const PushTextFileToGithub = () => {
               onChange={(e) => setFileName(e.target.value)}
               placeholder="File name (e.g., example.txt)"
             />
-
             {/* Input for the commit message */}
             <FormGroup
               type="text"
@@ -125,13 +130,13 @@ const PushTextFileToGithub = () => {
               onChange={(e) => setCommitMessage(e.target.value)}
               placeholder="Commit message"
             />
-
             {/* Button to push file to GitHub */}
             <button
               className="btn btn-dark rounded-0"
               onClick={pushTextFileToGithub}
+              disabled={loading} // Disable button while loading
             >
-              Push to GitHub
+              {loading ? "Pushing..." : "Push to GitHub"}
             </button>
           </div>
         </div>
