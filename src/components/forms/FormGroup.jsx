@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import IoIosInformationCircleCustom from "./IoIosInformationCircleCustom";
 import ErrorIcon from "./ErrorIcon";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -40,11 +40,11 @@ const FormGroup = ({ ...props }) => {
   return (
     <>
       <div
-        className={`form-group position-relative ${props.preventcopyCut && props.disabled ? ' disabled-input ' : ''} ${props.errorMessage ? " highlight-error " : ''} ${props.conClassName && props.conClassName ||""}`}
+        className={`form-group position-relative ${props.preventcopyCut && props.disabled ? ' disabled-input ' : ''} ${props.errorMessage ? " highlight-error " : ''} ${(props.conClassName && props.conClassName) ||""}`}
       >
         <input
           // className="form-control"
-          className={`form-control ${props.inputClassName && props.inputClassName || ""}`}
+          className={`form-control ${(props.inputClassName && props.inputClassName) || ""}`}
           id={props.label && props.label.replaceAll(/[^a-zA-Z0-9]/g, '_')}
           type={props.type}
           value={props.value}
@@ -79,7 +79,7 @@ const FormGroup = ({ ...props }) => {
               />
             </span>
           )}
-       {props.isPasswordField=='1' ?<span className={`password-toggle-icon1 `} onClick={props.handleChangedVisibility}>{props.type=="text" ? <FaEyeSlash  className="position-absolute cursor-pointer top-50 translate-middle-y text-primary-secondary"/> : <FaEye  className="position-absolute cursor-pointer top-50 translate-middle-y text-primary-secondary" />}</span>:''  } 
+       {props.isPasswordField ==='1' ?<span className={`password-toggle-icon1 `} onClick={props.handleChangedVisibility}>{props.type ==="text" ? <FaEyeSlash  className="position-absolute cursor-pointer top-50 translate-middle-y text-primary-secondary"/> : <FaEye  className="position-absolute cursor-pointer top-50 translate-middle-y text-primary-secondary" />}</span>:''  } 
       </div>
      { props.validMessage &&
            <>

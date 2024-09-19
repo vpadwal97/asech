@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import IoIosInformationCircleCustom from "./IoIosInformationCircleCustom";
 import ErrorIcon from "./ErrorIcon";
 
@@ -41,7 +41,7 @@ const FormTextarea = ({ ...props }) => {
         className={`form-group position-relative ${
           props.preventcopyCut && props.disabled ? " disabled-input " : ""
         } ${props.errorMessage ? " highlight-error " : ""} ${
-          props.conClassName && props.conClassName || ""
+          (props.conClassName && props.conClassName) || ""
         }`}
       >
         <textarea
