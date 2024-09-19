@@ -17,6 +17,7 @@ const StoriesMenu = () => {
   const [loading, setLoading] = useState(true);
   // const [error, setError] = useState(null);
   const [error, setError] = useState(null);
+  console.log(error);
 
   const fetchFiles = useCallback(async () => {
     setLoading(true);
@@ -55,7 +56,7 @@ const StoriesMenu = () => {
       setLoading(false);
     }
   }, [gitCreds, dispatch]);
-
+  
   useEffect(() => {
     fetchFiles();
   }, [fetchFiles]);
