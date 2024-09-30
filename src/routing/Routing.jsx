@@ -1,15 +1,26 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "../components/pages/Home";
-import StoriesMenu from "../components/pages/StoriesMenu";
-import Stories from "../components/pages/Stories";
-import PushTextFileToGithub from "../components/pages/PushTextFileToGithub";
-import HtmlEditor from "../components/pages/HtmlEditor";
+import Home from "../pages/Home";
+import StoriesMenu from "../pages/StoriesMenu";
+import Stories from "../pages/Stories";
+import PushTextFileToGithub from "../pages/PushTextFileToGithub";
+import HtmlEditor from "../pages/HtmlEditor";
+import MyCalendar from "../pages/MyCalendar";
+import LogoAnimation from "../pages/LogoAnimation";
+
 
 const Routing = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
     children: [
+      {
+        path: "/calendar",
+        element: <MyCalendar />,
+      },
+      {
+        path: "/LogoAnimation",
+        element: <LogoAnimation />,
+      },
       {
         path: "/stories",
         element: <StoriesMenu />,

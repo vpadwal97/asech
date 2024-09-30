@@ -7,7 +7,7 @@ const SafeHtmlRenderer = ({ htmlContent }) => {
 
   // Step 2: Parse the sanitized HTML into React elements
   const reactElement = parse(sanitizedHtml);
-
+  
   return reactElement;
 };
 

@@ -5,10 +5,14 @@ const initialState = {
   switchTheme: false,
   tinymceApiID : "ljg83y8hvjknl22l8vbjn86wcm1nly0rrwkkz1rdjqfuzohw",
   gitCreds: {
-    githubToken : "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",
+    githubToken : "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",
     repoOwner: "vpadwal97",
     repoName: "asech-thoughts",
     branch: "main",
+    // githubToken: process.env.GITHUB_TOKEN || '',
+    // repoOwner: process.env.REPO_OWNER || '',
+    // repoName: process.env.REPO_NAME || '',
+    // branch: process.env.BRANCH || 'main',
   },
 };
 

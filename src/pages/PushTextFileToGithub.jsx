@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { selectGitCreds } from "../../redux/asechSlice";
+import { selectGitCreds } from "../redux/asechSlice";
 import HtmlEditor from "./HtmlEditor";
-import FormTextarea from "../forms/FormTextarea";
-import FormGroup from "../forms/FormGroup";
+import FormTextarea from "../components/forms/FormTextarea";
+import FormGroup from "../components/forms/FormGroup";
 
 const PushTextFileToGithub = () => {
   const [inputText, setInputText] = useState("");
@@ -13,13 +13,15 @@ const PushTextFileToGithub = () => {
   const [fileSha, setFileSha] = useState(""); // SHA needed for updating
   const [loading, setLoading] = useState(false); // Loading state
   const gitCreds = useSelector(selectGitCreds);
-
+  const [errorMessage, setErrorMessage] = useState("");
   // GitHub repo details from Redux store
   const { githubToken, repoOwner, repoName, branch } = gitCreds;
   const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${fileName}`;
 
   // Fetch file SHA if it exists
   const checkIfFileExists = useCallback(async () => {
+    let newErrorMessage = errorMessage;
+
     try {
       const response = await axios.get(apiUrl, {
         headers: {
@@ -33,13 +35,29 @@ const PushTextFileToGithub = () => {
       const decodedContent = atob(response.data.content);
       setInputText(decodedContent);
       console.log("File exists, SHA:", response.data.sha);
+      newErrorMessage = {
+        ...newErrorMessage,
+        fileName: "File exists it will be updated",
+      };
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        console.log("File does not exist. It will be created.");
+        let error = "File does not exist. It will be created.";
+        console.log(error);
+        newErrorMessage = {
+          ...newErrorMessage,
+          fileName: error,
+        };
       } else {
+        newErrorMessage = {
+          ...newErrorMessage,
+          fileName: error,
+        };
         console.error("Error checking file existence:", error);
       }
+    } finally {
+      setErrorMessage(newErrorMessage);
     }
+    setErrorMessage(newErrorMessage);
   }, [apiUrl, githubToken]);
 
   // Function to create or update the text file on GitHub
@@ -121,7 +139,9 @@ const PushTextFileToGithub = () => {
               type="text"
               value={fileName}
               onChange={(e) => setFileName(e.target.value)}
-              placeholder="File name (e.g., example.txt)"
+              label="File name (e.g., example.txt)"
+              tooltipMessage="(e.g., example.txt)"
+              errorMessage={errorMessage.fileName}
             />
             {/* Input for the commit message */}
             <FormGroup

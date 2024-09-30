@@ -3,11 +3,15 @@ import { Outlet } from "react-router-dom";
 import MouseTracker from "./MouseTracker";
 import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { selectswitchTheme, setswitchTheme } from "../../redux/asechSlice";
+import { selectswitchTheme, setswitchTheme } from "../redux/asechSlice";
 
 const Home = () => {
   const switchTheme = useSelector(selectswitchTheme);
   // const [switchTheme, setSwitchTheme ]=useState(false);
+  const apiUrl = process.env.REPO_OWNER;
+  console.log("Current NODE_ENV:", process.env.NODE_ENV);
+
+console.log("REPO_OWNER",apiUrl);
   const dispatch = useDispatch();
   return (
     <>
