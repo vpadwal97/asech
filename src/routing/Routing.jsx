@@ -6,6 +6,7 @@ import PushTextFileToGithub from "../pages/PushTextFileToGithub";
 import HtmlEditor from "../pages/HtmlEditor";
 import MyCalendar from "../pages/MyCalendar";
 import LogoAnimation from "../pages/LogoAnimation";
+import Carousels from "../pages/Carousels";
 
 
 const Routing = createBrowserRouter([
@@ -20,6 +21,10 @@ const Routing = createBrowserRouter([
       {
         path: "/LogoAnimation",
         element: <LogoAnimation />,
+      },
+      {
+        path: "/Carousels",
+        element: <Carousels />,
       },
       {
         path: "/stories",

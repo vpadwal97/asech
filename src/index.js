@@ -5,6 +5,8 @@ import './assets/css/style.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "bootstrap/dist/css/bootstrap.min.css"
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 

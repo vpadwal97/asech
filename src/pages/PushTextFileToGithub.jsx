@@ -58,7 +58,7 @@ const PushTextFileToGithub = () => {
       setErrorMessage(newErrorMessage);
     }
     setErrorMessage(newErrorMessage);
-  }, [apiUrl, githubToken]);
+  }, [apiUrl, githubToken ,errorMessage]);
 
   // Function to create or update the text file on GitHub
   const pushTextFileToGithub = async () => {

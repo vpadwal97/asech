@@ -106,25 +106,25 @@ function LogoAnimation() {
       <div
         className={`checkView is${
           isInView ? "In" : "NotIn"
-        }View allCon container d-flex flex-wrap justify-content-center align-items-center`}
+        }View allCon container d-flex flex-wrap justify-content-center align-items-center overflow-hidden text-center`}
       >
         <div
           className={`checkView is${
             isInView ? "In" : "NotIn"
-          }View topCon border p-5 rounded-pill`}
+          }View topCon border p-5 m-4 rounded-pill`}
         >
           topCon
         </div>
-        <div className="d-flex justify-content-center align-items-center w-100">
+        <div className="d-flex justify-content-center align-items-center flex-wrap w-100">
           <div
             className={`checkView is${
               isInView ? "In" : "NotIn"
-            }View leftCon border p-5 rounded-pill`}
+            }View leftCon border p-5 m-4 rounded-pill`}
           >
             leftCon
           </div>
           <div
-            className={`centerCon logocon border p-5 rounded-pill position-relative text-center m-5`}
+            className={`logocon centerCon p-5 m-4 rounded-pill position-relative text-center`}
             ref={ref}
           >
             <img src={logo} alt="" className={`logo `} />
@@ -144,7 +144,7 @@ function LogoAnimation() {
           <div
             className={`checkView is${
               isInView ? "In" : "NotIn"
-            }View rightCon border p-5 rounded-pill`}
+            }View rightCon border p-5 m-4 rounded-pill`}
           >
             rightCon
           </div>
@@ -152,7 +152,7 @@ function LogoAnimation() {
         <div
           className={`checkView is${
             isInView ? "In" : "NotIn"
-          }View bottomCom border p-5 rounded-pill`}
+          }View bottomCom border p-5 m-4 rounded-pill`}
         >
           bottomCom
         </div>
