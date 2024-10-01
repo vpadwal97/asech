@@ -1,9 +1,10 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import MouseTracker from "./MouseTracker";
 import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { selectswitchTheme, setswitchTheme } from "../redux/asechSlice";
+import Routing from "../routing/Routing";
 
 const Home = () => {
   const switchTheme = useSelector(selectswitchTheme);
@@ -13,6 +14,22 @@ const Home = () => {
 
 console.log("REPO_OWNER",apiUrl);
   const dispatch = useDispatch();
+
+
+  const routes = Routing.routes;
+
+  const getPaths = (routes) => {
+    const paths = routes.map(route => route.path);
+    routes.forEach(route => {
+      if (route.children) {
+        paths.push(...getPaths(route.children));
+      }
+    });
+    return paths;
+  };
+
+  const paths = React.useMemo(() => getPaths(routes), [routes]);
+
   return (
     <>
       <div data-bs-theme={switchTheme ? "dark" : "light"}>
@@ -29,6 +46,17 @@ console.log("REPO_OWNER",apiUrl);
             }}
           />
         </OverlayTrigger>
+        {console.log("Routing",Routing.routes)}
+        <div>
+            <h1>Available Links</h1>
+            <ul>
+                {paths.map((path, index) => (
+                    <li key={index}>
+                        <Link to={path}>{path}</Link>
+                    </li>
+                ))}
+            </ul>
+        </div>
 
         <MouseTracker />
         <Outlet />
